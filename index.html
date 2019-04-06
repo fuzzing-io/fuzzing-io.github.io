@@ -1,0 +1,323 @@
+<html>
+
+<head>
+<title>Fuzzing IO :: Security Research</title>
+<style>
+@font-face {
+    font-family:"Virus_01";
+    src: url('virus_01-webfont.woff2') format('woff2'),
+         url('virus_01-webfont.woff') format('woff'),
+	 url("Virus_01.ttf");
+    font-style: normal;
+}
+
+.glitch_text { 
+    font-family: "Virus_01";
+}
+
+body {
+    background: #FFFFFF;
+    width: "100%";
+    font-family: Verdana;
+}
+
+a {
+    color: rgb(68, 84, 106);
+}
+
+h3 {
+font-family: monospace, courier;
+font-weight: bold;
+}
+
+h3 {
+font-family: monospace, courier;
+}
+
+#header {
+    color: #cccccc;
+    background: rgb(68, 84, 106);
+    font-size: 10vw;
+    text-align: center;
+}
+
+.navbar_button {
+    float: left;
+    padding: 5px;
+}
+#navbar {
+    color: #cccccc;
+    background: #000;
+    font-size: 2vw;
+    text-align: center;
+}
+
+.center-div {
+     margin: 0 auto;
+     width: 100px;
+}
+
+.collapse{
+  cursor: pointer;
+  display: block;
+  background: #cdf;
+}
+.collapse + input{
+  display: none; /* hide the checkboxes */
+}
+.collapse + input + div{
+  display:none;
+}
+.collapse + input:checked + div{
+  display:block;
+}
+</style>
+</head>
+
+<body>
+<div id="header">
+  <div class="glitch_text">
+    <font color="white">FUZZING<font color="orange">/</font>IO</font>
+ </div>
+</div>
+<!--
+<div id="navbar"><center>
+<div class="navbar_button">HOME</div>
+<div class="navbar_button">PAPERS</div>
+<div class="navbar_button">RESEARCH</div>
+<div class="navbar_button">BLOG</div>
+</center>
+</div>
+-->
+</br>
+<div style="text-align:center">
+<b>Richard Johnson</b></br>
+<a href="rjohnson@fuzzing.io">rjohnson@fuzzing.io</a>
+</br> 
+<a href="http://twitter.com/richinseattle">@richinseattle</a> 
+</div>
+
+<label class="collapse" for="_bio"><h2>[+] About</h2>
+</label>
+<input id="_bio" type="checkbox">
+<div>
+<h2>Bio</h2>
+<table><tr valign="top">
+<td>
+<img width="250" src="rjohnson-fuzzing-tech.jpg">
+</td>
+<td style="padding-left:10px">
+<p>
+Richard Johnson is a computer security specialist with a focus on software vulnerability analysis. Currently the Director of Security Research for Oracle Cloud Infrastructure and owner of Fuzzing IO, a research and development company offering professional training services, Richard offers over 15 years of professional expertise and leadership in the information security industry. Current responsibilities include defining and executing on a proactive offensive security research strategy for a world leading cloud infrastructure and development team at Oracle. This work encompasses all parts of the cloud stack including hardware validation on third party components; zeroday research on hypervisors, kernels, and third-party code; and deep dives on the proprietary services offered to end users. 
+</br></br>
+Prior to Oracle, Richard lead the security research efforts for the Talos Security Intelligence and Research Group at Cisco Systems, Inc. Previous research endeavors focused on the development of advanced fuzzing and crash analysis technologies facilitating the automation of the vulnerability triage and discovery process. Richard has delivered training and presented annually at top-tier industry conferences worldwide for over a decade and is an invited speaker and trainer at several leading events. Richard was also co-founder of the Uninformed Journal and is on the committee for the USENIX Workshop on Offensive Technologies.
+</p>
+</td>
+</tr></table>
+</div>
+<label class="collapse" for="_1">
+<h2>[+] Advanced Fuzzing and Crash Analysis Training</h2>
+</label>
+<input id="_1" type="checkbox"> 
+<div>
+<p>
+This class is designed to introduce students to the best tools and technology available for automating vulnerability discovery and crash triage with a focus on delivering a practical approach to applying this technology in real deployments at any scale. 
+</br></br>
+Through an applied understanding of introductory program analysis and binary translation, techniques for finding various bug classes and methods for improved crash debugging will be discussed. We will take a deep dive into fuzzing, covering all aspects of this practical approach to finding bugs. As the most approachable and versatile of the available tools, the student will apply various fuzzing techniques to several real-world pieces of software. Students will learn strategies for analyzing attack surface, writing grammars, and generating effective corpus. We will explore in detail the latest innovations such as harnessing code coverage for guided evolutionary fuzzing and symbolic reasoning for concolic fuzzing.
+</p>
+<label class="collapse"><h3>
+<a href="https://docs.google.com/document/d/1hX-ZMaVDA3L6fIK6XVhk3OF6j857qT_pyyKBtRITyDA">[>] Full Syllabus</a>
+</h3></label>
+
+<label class="collapse"><h3>[-] Upcoming Events</h3></label>
+<div style="text-align:center">
+<b>Hack In The Box </b></br>
+MAY 6 - MAY 8 </br>
+Amsterdam, Netherlands </br>
+<a href="https://conference.hitb.org/hitbsecconf2019ams/sessions/3-day-training-7-advanced-fuzzing-crash-analysis/">Register Now!</a></br>
+</br>
+<b>EkoParty LA</b> </br>
+JUN 5 - JUN 7 </br>
+Los Angeles, California </br>
+<a href="#">Registration Coming Soon!</a> </br>
+</br>
+<b>Recon</b> </br>
+JUN 24 - JUN 27 </br>
+Montreal, Canada </br>
+<a href="https://recon.cx/2019/montreal/training/trainingfuzzing.html">Register Now!</a> </br>
+</br>
+<b>RingZero</b> </br>
+AUG 3 - AUG 6 </br>
+Las Vegas, Nevada, US </br>
+(Concurrent with Black Hat USA Training) </br>
+<a href="https://ringzer0.training/advanced-fuzzing-crash-analysis.html">Register Now!</a> </br>
+</br>
+<b>Toorcon</b> </br>
+SEP 10 - SEP 13 </br>
+San Diego, California, US </br>
+<a href="#">Registration Coming Soon!</a> </br>
+</div>
+
+<label class="collapse"><h3>[-] Past Events</h3></label>
+<div style="text-align:center">
+<h3>2019</h3>
+<b>OffensiveCon</b> </br>
+FEB 4 - FEB 7 </br>
+Berlin, Germany </br>
+<font color="red">Sold Out</font> </br>
+</br>
+<b>CanSecWest</b> </br>
+MAR 16 - MAR 19 </br>
+Vancouver, Canada </br>
+<a href="https://cansecwest.com/dojos/2019/vulndisco.html">Registration Closed!</a> </br>
+</br>
+
+<h3>2018</h3>
+<b>OffensiveCon (Week 1)</b> </br>
+FEB 13 - FEB 15 </br>
+Berlin, Germany </br>
+<font color="red">Sold Out</font> </br>
+</br>
+<b>OffensiveCon (Week 2)</b> </br>
+FEB 19 - FEB 21 </br>
+Berlin, Germany </br>
+<font color="red">Sold Out</font> </br>
+</br>
+<b>CanSecWest</b> </br>
+MAR 10 - MAR 13 </br>
+Vancouver, Canada </br>
+<a href="#">Registration Closed!</a> </br>
+</br>
+<b>SysScan 360</b> </br>
+MAR 17 - MAR 21 </br>
+Singapore </br>
+<a href="#">Registration Closed!</a> </br>
+</br>
+<b>OPCDE</b> </br>
+APR 2 - APR 5 </br>
+Dubai, UAE </br>
+<a href="#">Registration Closed!</a> </br>
+</br>
+<b>Recon</b> </br>
+JUN 15 - JUN 17 </br>
+Montreal, Canada </br>
+<font color="red">Sold Out</font> </br>
+</br>
+<b>Toorcon</b> </br>
+SEP 10 - SEP 13 </br>
+San Diego, California, US </br>
+</br>
+<b>Hack In The Box</b> </br>
+OCT 27 - OCT 29 </br>
+Beijing, China </br>
+<a href="#">Registration Closed!</a> </br>
+</br>
+<b>Hushcon</b> </br>
+DEC 7 - DEC 8 </br>
+Seattle, Washington </br>
+<a href="#">Registration Closed!</a> </br>
+
+
+<h3>2017</h3>
+<b>Power of Community (Week 1)</b> </br>
+NOV 4 - NOV 8 </br>
+Seoul, Korea </br>
+<font color="red">Sold Out</font> </br>
+</br>
+<b>Power of Community (Week 2)</b> </br>
+NOV 13 - NOV 15 </br>
+Seoul, Korea </br>
+<font color="red">Sold Out</font> </br>
+</br>
+<b>Hushcon</b> </br>
+DEC 7 - DEC 8 </br>
+Seattle, Washington </br>
+<a href="#">Registration Closed!</a> </br>
+</div>
+</div>
+
+
+<label class="collapse" for="_2"><h2>[+] Research Talks</h2></label>
+<input id="_2" type="checkbox">
+<div>
+<div style="text-align:center">
+<p><span><span><strong>Taint Driven Crash Analysis </strong> <br /> 
+Hack In The Box, Beijing, China, October 2018 <br />
+<br /></span></span>
+</p>
+<hr />
+<p><span><span><strong>Evolutionary Kernel Fuzzing </strong> <br /> 
+Recon, Montreal, Canada, July 2017 <br />
+Black Hat, Las Vegas, USA, July 2017 <br />
+<a href="http://fuzzing.io/Presentations/Evolutionary Kernel Fuzzing-BH2017-rjohnson-FINAL.pdf">pdf</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Harnessing Intel Processor Trace on Windows for Vulnerability Discovery </strong> <br /> Hack in the Box, Amsterdam, Netherlands, April 2017 <br /> CanSecWest, Vancouver, Canada, March 2017 <br /> Recon BRX, Brussels, Belgium, February 2017 <br /> Hushcon, Seattle, Washington, December 2016 <br /> Countermeasure, Ottowa, Canada, November 2016 <br /> Blue Hat, Seattle, Washington, November 2016 <br /> Ruxcon, Melbourne, Australia, October 2016 <br /> <a href="http://fuzzing.io/Presentations/Harnessing Intel Processor Trace on Windows for Vulnerability Discovery - rjohnson.pdf">pdf</a> <a href="https://github.com/intelpt">code</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Go Speed Tracer </strong> <br /> Recon, Montreal, Canada, June 2016 <br /> Toorcamp Seattle, Washington, June 2016 <br /> Hack In The Box, Amsterdam, Netherlands, May 2016 <br /> <a href="http://fuzzing.io/Presentations/Go Speed Tracer v2 - rjohnson.pdf">pdf</a> <a href="https://www.youtube.com/watch?v=MPv8LcUoGVE">video (HITB)</a> <a href="https://www.youtube.com/watch?v=oWKDaD9wrWo">video (Recon)</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> High Performance Fuzzing </strong> <br /> Hushcon, Seattle, Washington, December 2015 <br /> PacSec, Tokyo, Japan, Nov 2015 <br /> Ruxcon, Melbourne, Austrlia, October 2015 <br /> B-Sides Knoxville, Knoxville, Tennessee, May 2015 <br /> InfoSec Southwest, Austin, Texas, April 2015 <br /> <a href="http://fuzzing.io/Presentations/High%20Performance%20Fuzzing.pdf">pdf</a> <a href="https://www.youtube.com/watch?v=Di74wGAHysA">video</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Fuzzing and Patch Analysis - SAGEly Advice </strong> <br /> NoSuchCon, Paris, France, November 2014 <br /> Hack In The Box, Kuala Lumpur, Malaysia, October 2014 <br /> Recon, Montreal, Canada, June 2014 <br /> Shakacon, Hawaii, June 2014 <br /> <a href="http://fuzzing.io/Presentations/Fuzzing%20and%20Patch%20Analysis%20-%20SAGEly%20Advice.pdf">pdf</a> <a href="https://www.youtube.com/watch?v=Xt5A2jEgDVU">video (Recon)</a> <a href="https://www.youtube.com/watch?v=VVTWbEZi3ac">video (NoSuchCon)</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Taint Nobody Got Time for Crash Analysis </strong> <br /> Recon, Montreal, Canada, June 2013 <br /> Summercon, New York City, New York, June 2013 <br /> NoSuchCon, Paris, France, May 2013 <br /> InfoSec Southwest, Austin, Texas, March 2013 <br /> <a href="http://fuzzing.io/Presentations/Taint%20Nobody%20Got%20Time%20for%20Crash%20Analysis%20-%20slides.pdf">pdf</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Improving Software Security with Dynamic Binary Instrumentation </strong> <br /> SOURCE, Seattle, Washington, June 2011 <br /> InfoSec Southwest, Austin, Texas, March 2012 <br /> <a href="http://fuzzing.io/Presentations/Improving Software Security with Dynamic Binary Instrumentation.pptx">pptx</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Razorback Framework </strong> <br /> Gigacon, Warsaw, Poland, September 2011 <br /> Internet Security Days, Bruehl, Germany, September 2011 <br /> <a href="http://fuzzing.io/Presentations/Razorback Framework - rjohnson.pptx">pptx</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> A Castle Made of Sand: Adobe Reader X Sandbox </strong> <br /> Hackito Ergo Sum, Paris, France, April 2011 </br>CanSecWest, Vancouver, B.C. Canada, March 2011 <br /> <a href="http://fuzzing.io/Presentations/A Castle Made of Sand - HES final.pptx">pptx</a> (minor update) <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Harder, Better, Faster, Stronger: Semi-Auto Vulnerability Research </strong> <br /> Blue Hat, Redmond, Washington, October 2010 <br /> Black Hat USA, Las Vegas, Nevada, August 2010 <br /> <a href="http://fuzzing.io/Presentations/Harder, Better, Faster, Stronger - slides.pptx">slides</a> <a href="http://fuzzing.io/Presentations/Harder, Better, Faster, Stronger - paper.pdf">paper</a> <a href="http://www.youtube.com/watch?v=qMds-mMxozg">video</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Visualizing Software Security </strong> <br /> Blue Hat, Redmond, Washington, October 2008 <br /> VizSec, Cambridge, Massasschusetts, September 2008 <br /> <a href="http://fuzzing.io/Presentations/200809 VizSec - Visualizing Software Security/Visualizing Software Security.pptx">pptx</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Fast n Furious Transforms </strong> <br /> Toorcon Seattle, Seattle, Washington, April 2008 <br /> <a href="http://fuzzing.io/Presentations/200804 Toorcon - Fast n Furious Transforms/Fast n Furious Transforms.pdf">pdf</a> <a href="http://fuzzing.io/Presentations/200804 Toorcon - Fast n Furious Transforms/Fast n Furious Transforms.pptx">pptx</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> AutoHacking with Phoenix Enabled Data Flow Analysis </strong> <br /> Toorcon 9, San Diego, California, October 2007 <br /> <a href="http://fuzzing.io/Presentations/200710 Toorcon - AutoHacking with Phoenix Enabled Data Flow Analysis/AutoHacking with Phoenix Enabled Data Flow Analysis.pdf">pdf</a> <a href="http://fuzzing.io/Presentations/200710 Toorcon - AutoHacking with Phoenix Enabled Data Flow Analysis/AutoHacking with Phoenix Enabled Data Flow Analysis.pptx">pptx</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Logical Fuzzing </strong> <br /> VNSECON, Ho Chi Minh, Vietnam, August 2007 <br /> <a href="http://fuzzing.io/Presentations/200708 VNSECON - Logical Fuzzing/Logical Fuzzing.pdf">pdf</a> <a href="http://fuzzing.io/Presentations/200708 VNSECON - Logical Fuzzing/Logical Fuzzing.pptx">pptx</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Memory Allocator Attack and Defense </strong> <br /> Toorcon Seattle, Seattle, Washington, May 2007 <br /> <a href="http://fuzzing.io/Presentations/200705 Toorcon - Memory Allocator Attack and Defense/richardj - Memory Allocator Attack and Defense.pptx">pptx</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Windows Vista: Exploitation Countermeasures </strong> <br /> EuSecWest, London, England, March 2007 <br /> Toorcon 8, San Diego, California, September 2006 <br /> <a href="http://fuzzing.io/Presentations/200703 EuSecWest - Windows Vista Exploitation Countermeasures/rjohnson - Windows Vista Exploitation Countermeasures.ppt">ppt</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Disassembler Internals II </strong> <br /> 22nd Chaos Communication Congress, Berlin, Germany, December 2005 <br /> <a href="http://fuzzing.io/Presentations/200512 CCC - Disassembler Internals II/Disassembler Internals II.pdf">pdf</a> <a href="http://fuzzing.io/Presentations/200512 CCC - Disassembler Internals II/codis.tar.gz">codis.tar.gz</a> <a href="http://fuzzing.io/Presentations/200512 CCC - Disassembler Internals II/idastruct.tar.gz">idastruct.tar.gz</a> <a href="http://fuzzing.io/Presentations/200509 Toorcon - Disassembler Internals I/codis.png">codis.png</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> x86 Disassembler Internals </strong> <br /> Toorcon 7, San Diego, California, September 2005 <br /> <a href="http://fuzzing.io/Presentations/200509 Toorcon - Disassembler Internals I/rjohnson-x86_disassembler_internals.pdf">pdf</a> <a href="http://fuzzing.io/Presentations/200509 Toorcon - Disassembler Internals I/codis.tar.gz">codis.tar.gz</a> <a href="http://fuzzing.io/Presentations/200509 Toorcon - Disassembler Internals I/codis.png">codis screenshot</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Automated Debugging and Process Analysis </strong> <br /> Interz0ne IV, Atlanta, Georgia, March 2005 <br /> <a href="http://fuzzing.io/Presentations/200504 Interz0ne - Automated Debugging and Process Analysis/Automated Debugging and Process Analysis.pdf">pdf</a> <a href="http://fuzzing.io/Presentations/200504 Interz0ne - Automated Debugging and Process Analysis/dltrace-0.5.tar.bz2">dltrace-0.5.tar.bz2</a> <a href="http://fuzzing.io/Presentations/200504 Interz0ne - Automated Debugging and Process Analysis/index.html">dltrace.README</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> Hooking the Linux ELF Loader </strong> <br /> Toorcon 6, San Diego, California, October 2004 <br /> <a href="http://fuzzing.io/Presentations/200409 Toorcon - Hooking the Linux ELF Loader/hooking_the_linux_ELF_loader.pdf">pdf</a> <a href="http://fuzzing.io/Presentations/200409 Toorcon - Hooking the Linux ELF Loader/index.html">md5verify</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><span><strong> A Comparison of Buffer Overflow Prevention Implementations and Weaknesses </strong> <br /> Black Hat USA, Las Vegas, Nevada, July 2004 <br /> Defcon 12, Las Vegas, Nevada, July 2004 <br /> <a href="http://fuzzing.io/Presentations/200407 Black Hat - A Comparison of Buffer Overflow Prevention Implementations and Weaknesses/Buffer_Overflow_Prevention.ppt">pdf</a> <a href="http://fuzzing.io/Presentations/200407 Black Hat - A Comparison of Buffer Overflow Prevention Implementations and Weaknesses/avtp.tar.gz">avtp.tar.gz</a> <a href="http://fuzzing.io/Presentations/200407 Black Hat - A Comparison of Buffer Overflow Prevention Implementations and Weaknesses/index.htm">avtp.README</a> <br /> <br /></span></span>
+</p>
+<hr />
+<p><span><strong> Advanced Shellcode Implementations </strong> <br /> Interz0ne III, Atlanta, Georgia, April 2004 <br /> <a href="http://fuzzing.io/">pdf</a> </span></p>
+</div>
+</div>
+
+<label class="collapse" for="_3"><h2><a href="/ref">[>] Reference Library</a></h2></label>
+
+
+
+</body>

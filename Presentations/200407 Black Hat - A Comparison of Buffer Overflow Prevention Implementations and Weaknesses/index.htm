@@ -1,0 +1,150 @@
+<html>
+
+<title>Blackhat and Defcon 2004 conference materials</title>
+<body>
+<font face="verdana" size="4">
+<b>A Comparison of Buffer Overflow Prevention Implementations and Weaknesses</b>
+</font><br /><br />
+<font face="verdana" size="3">
+<b>Blackhat and Defcon 2004 conference materials</b><br />
+<font size="2">Richard Johnson (rjohnson@idefense.com)<br /> Peter Silberman (psilberman@idefense.com)</font><br /><br />
+<a href="Buffer_Overflow_Prevention.pdf">Paper</a><br />
+<a href="Buffer_Overflow_Prevention.ppt">Presentation Slides</a><br />
+<a href="avtp.tar.gz">Attack Vector Test Platform</a><br /><br />
+</font>
+<font size="2">
+<pre>
+Vulnerability Matrix Test Results for Linux
+-------------------------------------------
+
+A plus symbol (+) indicates that the software successfully protected against the specified
+exploitation vector.
+
+
+
+ProPolice SSP Stack Protection
+------------------------------
+
+Buffer overflow on stack all the way to the target
++       Target: Parameter function pointer
+-       Target: Parameter longjmp buffer
++       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
++       Target: Function pointer
++       Target: Longjmp buffer
+
+Buffer overflow on heap/BSS all the way to the target
+-       Target: Function pointer
+-       Target: Longjmp buffer (Not Supported by Win32)
+
+Buffer overflow of pointer on stack and then pointing to target
++       Target: Parameter function pointer
++       Target: Parameter longjmp buffer (Not Supported by Win32)
++       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
++       Target: Function pointer
++       Target: Longjmp buffer (Not Supported by Win32)
+
+Buffer overflow of pointer on heap/BSS and then pointing to target
+-       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
+-       Target: Function pointer (Not Supported by Win32)
+-       Target: Longjmp buffer (Not Supported by Win32)
+
+
+
+StackShield
+-----------
+
+Buffer overflow on stack all the way to the target
+-       Target: Parameter function pointer
+-       Target: Parameter longjmp buffer
++       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
+-       Target: Function pointer
+-       Target: Longjmp buffer
+
+Buffer overflow on heap/BSS all the way to the target
+-       Target: Function pointer
+-       Target: Longjmp buffer (Not Supported by Win32)
+
+Buffer overflow of pointer on stack and then pointing to target
+-       Target: Parameter function pointer
+-       Target: Parameter longjmp buffer (Not Supported by Win32)
++       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
+-       Target: Function pointer
+-       Target: Longjmp buffer (Not Supported by Win32)
+
+Buffer overflow of pointer on heap/BSS and then pointing to target
++       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
+-       Target: Function pointer (Not Supported by Win32)
+-       Target: Longjmp buffer (Not Supported by Win32)
+
+
+
+StackGuard
+----------
+
+Buffer overflow on stack all the way to the target
+-       Target: Parameter function pointer
+-       Target: Parameter longjmp buffer
++       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
+-       Target: Function pointer
+-       Target: Longjmp buffer
+
+Buffer overflow on heap/BSS all the way to the target
+-       Target: Function pointer
+-       Target: Longjmp buffer (Not Supported by Win32)
+
+Buffer overflow of pointer on stack and then pointing to target
+-       Target: Parameter function pointer
+-       Target: Parameter longjmp buffer (Not Supported by Win32)
+-       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
+-       Target: Function pointer
+-       Target: Longjmp buffer (Not Supported by Win32)
+
+Buffer overflow of pointer on heap/BSS and then pointing to target
+-       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
+-       Target: Function pointer (Not Supported by Win32)
+-       Target: Longjmp buffer (Not Supported by Win32)
+
+
+
+Linux 2.4.26-grsec w/ SEGMEXEC
+------------------------------
+
+Buffer overflow on stack all the way to the target
++       Target: Parameter function pointer
++       Target: Parameter longjmp buffer
++       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
++       Target: Function pointer
++       Target: Longjmp buffer
+
+Buffer overflow on heap/BSS all the way to the target
++       Target: Function pointer
++       Target: Longjmp buffer (Not Supported by Win32)
+
+Buffer overflow of pointer on stack and then pointing to target
++       Target: Parameter function pointer
++       Target: Parameter longjmp buffer (Not Supported by Win32)
++       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
++       Target: Function pointer
++       Target: Longjmp buffer (Not Supported by Win32)
+
+Buffer overflow of pointer on heap/BSS and then pointing to target
++       Target: Return address
++       Target: Old base pointer (Not Supported by Win32)
++       Target: Function pointer (Not Supported by Win32)
++       Target: Longjmp buffer (Not Supported by Win32)
+</pre>
+</font>
+</body>
+
+</html>

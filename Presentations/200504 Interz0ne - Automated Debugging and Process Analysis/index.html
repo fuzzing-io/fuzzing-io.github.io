@@ -1,0 +1,105 @@
+<html>
+
+<title>interz0ne 2005 conference materials</title>
+<body>
+<table width="600">
+<tr><td>
+<font face="verdana" size="4">
+<b>Automated Debugging and Process Analysis</b>
+</font><br /><br />
+</td></tr>
+<tr><td>
+<font face="verdana" size="3">
+<b>interz0ne 2005 conference materials</b><br />
+<a href="Automated Debugging and Process Analysis.pdf">Presentation Slides</a><br />
+<a href="dltrace-0.5.tar.bz2">Get the code</a><br /><br />
+</font>
+</td></tr>
+<tr><td>
+<font face="verdana" size="2">
+This is the README for dltrace, a dynamic library call 
+tracer package. The concepts in this package were discussed in the interz0ne 2005 security conference
+presentation titled "Automated Debugging and Process Analysis"
+<br /><br />
+- rjohnson@uninformed.org
+<br /><br />
+dltrace is a dynamic library call tracer which attempts to remain portable to
+all x86 platforms that support ELF binaries and expose a debugging interface
+via procfs or the ptrace() system call. The shared library call tracing is done
+at a level which allows all calls to all exported symbols by all loaded
+libraries to be traced. In addition, dltrace does not rely on rtld symbols to
+retrieve library and symbol information and is capable of determing function
+arguments dynamically via run-time disassembly.
+<br /><br />
+dltrace's functionality is somewhat similar to ltrace, however there are many
+differences under the hood. The most noticable difference is that dltrace is
+capable of tracing all calls to exported functions, regardless of how deep the
+call chain is. This is done by placing hooks directly at the entry point of
+each exported function, rather than at the calling address in the .text segment
+of the main executable program. The calling address can be determined by
+examining the frame pointer, so there is no need to break on the calling
+address. This also gives the advantage of determining the underlying
+functionality of unknown functions in the traced binary or in custom libraries
+that are linked by the traced binary. This works on stripped binaries as well
+since only symbols exported by shared libraries are needed for the trace. 
+<br /><br />
+Another unique feature in dltrace is the lack of reliance on a specifc rtld.
+Due to changes in the gnu run-time linker, the author has chosen not to rely on
+specific structures such as the link_map which is no longer exported by new
+versions of ld-linux. A new method has been chosen which may seem somewhat of a
+hack, however it works well and allows the tracer to be rtld agnostic. The new
+method is fairly simple: the traced process's address space is walked by
+PAGE_SIZE, when an elf signature is found ("\x7fELF") a hash is taken of the
+file's .text segment and compared to hashes which have been taken from the
+on-disk copies of all libraries linked by the traced executable. 
+<br /><br />
+The last feature is a rudimentary heuristics based approach to determining a
+function's arguments. This removes the reliance on pre-defined function
+prototypes and can allow for the discovery of call parameters to unknown
+functions. There's not much to be said about the methods used right now. A
+simple run-time disassembly of the calling function checks for mov's and push's
+which are likely to be arguments. 
+<br /><br />
+dltrace was developed during research for a talk at interz0ne 2005 on automated
+debug tool design. The slides are available on labs.idefense.com and can be
+consulted for further documentation on the methods used in dltrace. 
+<br /><br />
+USAGE 
+<pre>
+Usage: ./dltrace [OPTIONS] -- [file path] [args ...]
+  -p pid       attach to process id (file path required)
+
+Trace Options
+  -l           trace library calls
+  -d depth     limit trace recursion depth
+
+Output Options
+  -r           display registers (use multiple times)
+  -t           tree mode 
+  -v           verbose (use multiple times)
+  -o file      write trace output to file 
+
+Example:
+  dltrace -l  -- /usr/bin/last 5
+  dltrace -l -d5 -t -- /bin/ping localhost
+  dltrace -l -d3 -rr -vv -- /usr/bin/id 
+</pre>
+<br /><br />
+TESTING
+<br /><br />
+dltrace has been confirmed to work on Linux, Solaris x86, NetBSD, and FreeBSD
+at one time or another.  It has been tested against various libc versions and
+does not rely on rtld structures to find symbols and loaded libraries, so it
+should work with all combinations of compilers and linkers. One caveat is that
+the simple heursitics used in this version of dltrace may not detect arguments
+to functions which have been highly optimized. The author hopes to address this
+issue in the next release. 
+<br /><br />
+Any testing feedback would be highly appreciated. Other comments and feature
+requests are welcome. This version of dltrace is considered to be a work in
+progress and a more complete, faster, and accurate dltrace is planned for
+release this summer. 
+</table>
+</body>
+
+</html>

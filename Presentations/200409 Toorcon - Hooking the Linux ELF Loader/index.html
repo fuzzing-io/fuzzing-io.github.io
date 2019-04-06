@@ -1,0 +1,121 @@
+<html>
+
+<title>toorcon 2004 conference materials</title>
+<body>
+<table width="400">
+<tr><td>
+<font face="verdana" size="4">
+<b>Hooking the Linux ELF Loader</b>
+</font><br /><br />
+</td></tr>
+<tr><td>
+
+<font face="verdana" size="3">
+UPDATE 10/10/2006<br>
+</font>
+<font face="verdana" size="2">
+<br>
+Many thanks to Rodrigo Rubira Branco <rodrigo@kernelhacking.com> for adding
+SHA1 hash support and LSM integration features. Users can enable SHA hashes
+with -DUSE_SHA and LSM support with -DUSE_LSM.<br>
+<br>
+In addition, a locking issue has been corrected in this update. <br>
+<br>
+<a href="md5verify.tar.gz">Get md5verify now!</a><br>
+<br>
+
+<hr size=1>
+<br>
+</font>
+<font face="verdana" size="3">
+toorcon 2004 conference materials<br />
+<a href="hooking_the_linux_ELF_loader.pdf">Presentation Slides</a><br />
+<a href="md5verify.tar.gz">Get the code</a><br /><br />
+</font>
+</td></tr>
+<tr><td>
+<font face="verdana" size="2">
+This is the README for md5verify, an ELF binary execution
+integrity monitoring package. The concepts in this package
+were discussed in the toorcon 2004 security conference
+presentation titled "Hooking the ELF Loader"
+<br /><br />
+- rjohnson@uninformed.org
+
+<br /><br />
+Warning: Please note that this code is essentially a proof
+of concept and should be considered in the alpha stages of
+development. It is also not meant to be run as production
+code at this point, and probably will not work at all.
+Consider yourself warned.
+<br /><br />
+What it does do:
+<br /><br />
+md5verify.ko is a kernel driver which hooks the load_binary
+function for ELF files for the purpose of verifying the md5
+hash of the executed binary against a hash retrieved from
+the userspace daemon (verifyd). The driver registers a device
+for communication with userspace at initialization with a major
+device number of 169. The makefile can create the device file
+for you as /dev/md5verify if you type:
+</font>
+<pre>
+   root@kerndev:~/md5verify# make device
+   mknod /dev/md5verify c 169 0
+</pre>
+<font face="verdana" size="2">
+The load_binary function hook will send the inode and device
+number of the executed file to kerneld and waits for the hash
+lookup to complete. Once verifyd returns the hash, the kernel
+calculates its own md5 hash of the executed binary to ensure
+the integrity of the executed binary. A warning is displayed
+and the driver can optionally be set to disallow the execution
+of the binary via a define in kverify.c
+<br /><br /><br />
+SAMPLE SESSION
+</font>
+<pre>
+
+root@kerndev:~/md5verify# insmod md5verify.ko
+root@kerndev:~/md5verify# make db
+IFS=: ;\
+for i in $(PATH); do \
+     find $i -type f >> md5verify.db  ;\
+done
+root@kerndev:~/md5verify# ./verifyd -f md5verify.db
+...
+0301  00327731  acfa495103e7502e81af7558df32c7bf  /usr/sbin/logrotate
+0301  00327841  2be9ce13ac03c37f7a17b1f1e2f8c085  /usr/sbin/gopherd
+-- database loaded with 598 files --
+
+[1]+  Stopped                 ./verifyd -f md5verify.db
+root@kerndev:~/md5verify# bg
+[1]+ ./verifyd -f md5verify.db &
+root@kerndev:~/md5verify# id
+verifyd> cf65db833883c857448ba76f1aa4670d  /usr/bin/id
+uid=0(root) gid=0(root) groups=0(root)
+
+The kernel log displays:
+
+Nov 16 03:34:23 kerndev kernel: [md5verify] exec: /usr/bin/id
+Nov 16 03:34:23 kerndev kernel: [md5verify] stored hash:  cf65db833883c857448ba76f1aa4670d
+Nov 16 03:34:23 kerndev kernel: [md5verify] verify hash:  cf65db833883c857448ba76f1aa4670d
+
+After replacing /usr/bin/id with another binary:
+
+root@kerndev:~/md5verify# id 
+bash: /usr/bin/id: Operation not permitted
+
+The kernel log now displays:
+
+Nov 16 03:35:44 kerndev kernel: [md5verify] exec: /usr/bin/id
+Nov 16 03:35:44 kerndev kernel: [md5verify] stored hash:  cf65db833883c857448ba76f1aa4670d
+Nov 16 03:35:44 kerndev kernel: [md5verify] verify hash:  9742df0fe4a83ace753d576362041f63
+Nov 16 03:35:44 kerndev kernel: [md5verify] Warning: /usr/bin/id failed integrity test
+</pre>
+</td>
+</tr>
+</table>
+</body>
+
+</html>
